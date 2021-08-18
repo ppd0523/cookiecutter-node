@@ -58,5 +58,5 @@ $ npm test
 $ npm run serve     # on 127.0.0.1:8080
 
 # Build by production
-$ npm run publish
+$ npm run deploy
 ```
