@@ -1,0 +1,8 @@
+{
+    "project_name": "Node project",
+    "project_short_description": "",
+    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+    "version": "0.1.0",
+    "full_name": "your name",
+    "email": "you@email.com"
+}
