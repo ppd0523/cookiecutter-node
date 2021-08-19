@@ -55,7 +55,11 @@ module.exports = (env)=>{
             filename: 'index.html',
             template: './src/base.html',
             showErrors: true,
-            chunks: ['index', ]
+            chunks: ['index', ],
+            templateParameters: {
+                title: 'index',
+                lang: 'ko'
+            }
         })
     ];
 
@@ -72,7 +76,7 @@ module.exports = (env)=>{
         config.devtool = 'eval-source-map';
         config.devServer = {
             contentBase: path.resolve(__dirname, 'dist'),
-            publicPath: path.resolve(__dirname, 'dist'),
+            publicPath: '/',
             hot: true,
             inline: true,
             host: "127.0.0.1",
@@ -84,7 +88,7 @@ module.exports = (env)=>{
         config.mode = 'production';
         config.devServer = {
             contentBase: path.resolve(__dirname, 'dist'),
-            publicPath: path.resolve(__dirname, 'dist'),
+            publicPath: '/',
             host: "127.0.0.1",
             port: 8080,
             proxy : {}
