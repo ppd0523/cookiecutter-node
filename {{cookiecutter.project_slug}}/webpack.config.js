@@ -30,23 +30,16 @@ module.exports = (env)=>{
     
     let _module = {
         rules: [
-        //     {
-        //         test: /\.m?js$/,
-        //         include: [
-        //             path.resolve(__dirname, 'src')
-        //         ],
-        //         exclude: /node_modules/,
-        //         use: {
-        //             loader: 'babel-loader',
-        //             options:{
-        //                 presets: ['@babel/preset-env']
-        //             }
-        //         },
-        //     },
+            {
+                test: /\.m?js$/,
+                include: [path.resolve(__dirname, 'src')],
+                exclude: /node_modules/,
+                use: ['babel-loader']
+            },
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
-            }
+            },
         ]
     };
     
@@ -78,7 +71,6 @@ module.exports = (env)=>{
             contentBase: path.resolve(__dirname, 'dist'),
             publicPath: '/',
             hot: true,
-            inline: true,
             host: "127.0.0.1",
             port: 8080,
             proxy: {}
@@ -89,6 +81,7 @@ module.exports = (env)=>{
         config.devServer = {
             contentBase: path.resolve(__dirname, 'dist'),
             publicPath: '/',
+            hot: true,
             host: "127.0.0.1",
             port: 8080,
             proxy : {}
