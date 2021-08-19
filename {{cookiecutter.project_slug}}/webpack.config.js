@@ -24,7 +24,8 @@ module.exports = (env)=>{
     
     let _output = {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js'
+        filename: '[name].js',
+        clean: true
     };
     
     let _module = {
@@ -62,14 +63,16 @@ module.exports = (env)=>{
         entry: _entry,
         output: _output,
         module: _module,
-        plugins: _plugins
+        plugins: _plugins,
     }
 
     let isDev = env.mode.toLowerCase() === 'development' ? true: false;
     if(isDev){
         config.mode = 'development';
-        config.devtool = 'source-map';
+        config.devtool = 'eval-source-map';
         config.devServer = {
+            contentBase: path.resolve(__dirname, 'dist'),
+            publicPath: path.resolve(__dirname, 'dist'),
             hot: true,
             inline: true,
             host: "127.0.0.1",
@@ -79,7 +82,13 @@ module.exports = (env)=>{
     }
     else{
         config.mode = 'production';
-        config.devtool = 'cheap-module-source-map'
+        config.devServer = {
+            contentBase: path.resolve(__dirname, 'dist'),
+            publicPath: path.resolve(__dirname, 'dist'),
+            host: "127.0.0.1",
+            port: 8080,
+            proxy : {}
+        }
     }
     
     return config;
