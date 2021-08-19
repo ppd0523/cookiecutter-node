@@ -15,15 +15,14 @@ Node setting with Webpack5
 {{cookiecutter.project_slug}}
 ├── LICENSE
 ├── README.md
-├── dist                      # build output
+├── dist                       # build output
 ├── package.json
 ├── src                        # build input
 │   ├── base.html
 │   └── index.js
 ├── tests                      # test
 │   └── sample.spec.js
-├── webpack.config.js
-└── webpack.config.prod.js
+└── webpack.config.js 
 ```
 
 ## Dependency
