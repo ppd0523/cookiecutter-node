@@ -19,7 +19,7 @@ module.exports = (env)=>{
     console.log(`---------- Build by ${FGRED}${env.mode}${RESET} ----------`);
     
     let _entry = {
-        index: './src/index.js',
+        index: './src/index.ts',
     };
     
     let _output = {
@@ -31,10 +31,16 @@ module.exports = (env)=>{
     let _module = {
         rules: [
             {
-                test: /\.m?js$/,
+                test: /\.m?jsx?$/,
                 include: [path.resolve(__dirname, 'src')],
                 exclude: /node_modules/,
                 use: ['babel-loader']
+            },
+            {
+                test: /\.tsx?$/,
+                include: [path.resolve(__dirname, 'src')],
+                exclude: /node_modules/,
+                use: ['ts-loader']
             },
             {
                 test: /\.css$/,
