@@ -34,13 +34,13 @@ module.exports = (env)=>{
                 test: /\.m?jsx?$/,
                 include: [path.resolve(__dirname, 'src')],
                 exclude: /node_modules/,
-                use: ['babel-loader']
+                use: 'babel-loader'
             },
             {
                 test: /\.tsx?$/,
                 include: [path.resolve(__dirname, 'src')],
                 exclude: /node_modules/,
-                use: ['ts-loader']
+                use: 'ts-loader'
             },
             {
                 test: /\.css$/,
@@ -62,11 +62,16 @@ module.exports = (env)=>{
         })
     ];
 
+    let _resolve = {
+        extensions: ['.tsx', '.ts', '.js', '.jsx']
+    }
+    
     let config = {
         entry: _entry,
         output: _output,
         module: _module,
         plugins: _plugins,
+        resolve: _resolve,
     }
 
     let isDev = env.mode.toLowerCase() === 'development' ? true: false;
