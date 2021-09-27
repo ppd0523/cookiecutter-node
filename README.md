@@ -5,6 +5,7 @@ Node setting with Webpack5, Babel7
 
 ## Package
 * webpack5
+* typescript
 * babel7
     * babel-loader
     * style-loader
@@ -13,18 +14,18 @@ Node setting with Webpack5, Babel7
 
 ## Project files
 ```bash
-{{cookiecutter.project_slug}}
+.
 ├── LICENSE
 ├── README.md
-├── babel.config.js            # babel config
-├── dist/                      # build output
+├── babel.config.js
 ├── package.json
-├── src/                       # build input
+├── src
 │   ├── base.html
 │   └── index.js
-├── tests/                     # test
+├── tests
 │   └── sample.spec.js
-└── webpack.config.js          # webpack config
+├── tsconfig.json
+└── webpack.config.js
 
 ```
 
