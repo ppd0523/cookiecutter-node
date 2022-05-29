@@ -1,16 +1,14 @@
-# Cookiecutter NodeJS package
+# Cookiecutter HTML5 boilder-plate
 
 Node setting with Webpack5, Babel7
 
 
 ## Package
-* webpack5
+* webpack
 * typescript
-* babel7
-    * babel-loader
-    * style-loader
-    * css-loader
+* babel
 * jest
+* sass
 
 ## Project files
 ```bash
@@ -55,16 +53,18 @@ $ cookiecutter https://github.com/ppd0523/cookiecutter-node.git
 
 # After craeted
 $ npm i
+$ yarn
 
 # Testing
 $ npm test
+$ yarn test
 
 # Hosting
-$ npm run serve     # on 127.0.0.1:8080
+$ npm run start     # on 127.0.0.1:3000
+$ yarn start
 
-# Build by production
-$ npm run deploy
-
-$ npx webpack --env mode=development
-$ npx webpack --env mode=production
+# Build
+$ npm run build
+$ yarn build --env development
+$ yarn build --env production
 ```

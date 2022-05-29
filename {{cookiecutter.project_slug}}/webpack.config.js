@@ -1,103 +1,60 @@
-/**
- * Development 모드 옵션
- * npx webpack [serve] --env mode=development
- * 
- * Proudction 빌드 옵션
- * npx webpack --env mode=development
- */
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = (env)=>{
-    const FGRED = "\x1b[31m";
-    const RESET = "\x1b[0m";
-    if(!['development', 'production'].includes(env.mode)){
-        console.error(`${FGRED}[ERROR]${RESET} mode MUST be${RESET} 'development' or 'production'`);
-        return;
-    }
-    console.log(`---------- Build by ${FGRED}${env.mode}${RESET} ----------`);
-    
-    let _entry = {
-        index: './src/index.ts',
-    };
-    
-    let _output = {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-        clean: true
-    };
-    
-    let _module = {
+module.exports = {
+    mode: "development",
+    entry: {
+        index: path.resolve(__dirname, 'src', 'index.ts'),
+    },
+    resolve: {
+        extensions: ['.js', '.ts', '.json', 'css', 'scss', '.html']
+    },
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        filename: "[name].js",
+        clean: true,
+    },
+    module: {
         rules: [
             {
-                test: /\.m?jsx?$/,
-                include: [path.resolve(__dirname, 'src')],
+                test: /\.m?js$/,
                 exclude: /node_modules/,
-                use: 'babel-loader'
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env'],
+                    }
+                },
             },
             {
-                test: /\.tsx?$/,
+                test: /\.ts$/,
                 include: [path.resolve(__dirname, 'src')],
-                exclude: /node_modules/,
-                use: 'ts-loader'
+                use: 'ts-loader',
             },
             {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                test: /\.s?css$/,
+                use: ["style-loader", "css-loader", "sass-loader"],
             },
-        ]
-    };
-    
-    let _plugins = [
+        ],
+    },
+    plugins: [
         new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: './src/base.html',
-            showErrors: true,
-            chunks: ['index', ],
-            templateParameters: {
-                title: 'index',
-                lang: 'ko'
-            }
-        })
-    ];
-
-    let _resolve = {
-        extensions: ['.tsx', '.ts', '.js', '.jsx']
-    }
-    
-    let config = {
-        entry: _entry,
-        output: _output,
-        module: _module,
-        plugins: _plugins,
-        resolve: _resolve,
-    }
-
-    let isDev = env.mode.toLowerCase() === 'development' ? true: false;
-    if(isDev){
-        config.mode = 'development';
-        config.devtool = 'eval-source-map';
-        config.devServer = {
-            contentBase: path.resolve(__dirname, 'dist'),
-            publicPath: '/',
-            hot: true,
-            host: "127.0.0.1",
-            port: 8080,
-            proxy: {}
-        };
-    }
-    else{
-        config.mode = 'production';
-        config.devServer = {
-            contentBase: path.resolve(__dirname, 'dist'),
-            publicPath: '/',
-            hot: true,
-            host: "127.0.0.1",
-            port: 8080,
-            proxy : {}
-        }
-    }
-    
-    return config;
+            filename: "index.html",
+            template: path.resolve(__dirname, "src", "base.html"),
+            favicon: path.resolve(__dirname, "src", "resource", "favicon.ico"),
+            templateParameters: {},
+            minify: false,
+        }),
+    ],
+    devtool: 'inline-source-map',
+    devServer: {
+        static: {
+            directory: path.resolve(__dirname, 'dist'),
+        },
+        hot: true,
+        port: 3000,
+        watchFiles: ['./src/**/*']
+    },
+    target: 'web',
 }
