@@ -6,13 +6,13 @@
     "scripts": {
         "test": "jest tests",
         "build": "webpack",
-        "start": "webpack-dev-server --env development"
+        "start": "webpack-dev-server --env development",
         "deploy": "webpack --env production"
     },
     "author": "{{cookiecutter.full_name}}",
-    "license": "ISC",
+    "license": "MIT",
   "dependencies": {
-    "core-js": "^3.22.7",
+    "core-js": "^3.22.7"
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
