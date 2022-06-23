@@ -42,18 +42,22 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: "index.html",
             template: path.resolve(__dirname, "src", "index.html"),
+            favicon: '',
             templateParameters: {},
             minify: false,
+            meta: {},
         }),
     ],
     devtool: 'inline-source-map',
     devServer: {
         static: {
-            directory: path.resolve(__dirname, 'dist'),
+            directory: path.resolve(__dirname, 'static'),
+            publicPath: '/static/'
         },
         hot: true,
         port: 3000,
-        watchFiles: ['./src/**/*']
+        watchFiles: ['./src/**/*'],
+        allowedHosts: 'all',
     },
     target: 'web',
 }
